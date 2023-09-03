@@ -7,19 +7,23 @@
 test2_global(
   x,
   y,
-  representation = "adjacency",
-  distance = "frobenius",
+  representation = c("adjacency", "laplacian", "modularity", "transitivity"),
+  distance = c("frobenius", "hamming", "spectral", "root-euclidean"),
   stats = c("flipr:t_ip", "flipr:f_ip"),
   B = 1000L,
   test = "exact",
   k = 5L,
-  seed = NULL
+  seed = NULL,
+  ...
 )
 }
 \arguments{
-\item{x}{An \code{\link{nvd}} object listing networks in sample 1.}
+\item{x}{Either an object of class \link{nvd} listing networks in sample 1 or a
+distance matrix of size \eqn{n_1 + n_2}.}
 
-\item{y}{An \code{\link{nvd}} object listing networks in sample 2.}
+\item{y}{Either an object of class \link{nvd} listing networks in sample 2 or an
+integer value specifying the size of sample 1 or an integer vector
+specifying the indices of the observations belonging to sample 1.}
 
 \item{representation}{A string specifying the desired type of representation,
 among: \code{"adjacency"}, \code{"laplacian"} and \code{"modularity"}.
@@ -50,6 +54,8 @@ for the edge count statistics. Defaults to \code{5L}.}
 
 \item{seed}{An integer for specifying the seed of the random generator for
 result reproducibility. Defaults to \code{NULL}.}
+
+\item{...}{Extra arguments to be passed to the distance function.}
 }
 \value{
 A \code{\link[base]{list}} with three components: the value of the
@@ -67,17 +73,19 @@ used, together with several choices of network matrix representations and
 distances between networks.
 }
 \examples{
-n <- 10L
+n <- 5L
+gnp_params <- list(p = 1/3)
+k_regular_params <- list(k = 8L)
 
 # Two different models for the two populations
-x <- nvd("smallworld", n)
-y <- nvd("pa", n)
+x <- nvd(model = "gnp", n = n, model_params = gnp_params)
+y <- nvd(model = "k_regular", n = n, model_params = k_regular_params)
 t1 <- test2_global(x, y, representation = "modularity")
 t1$pvalue
 
 # Same model for the two populations
-x <- nvd("smallworld", n)
-y <- nvd("smallworld", n)
+x <- nvd(model = "gnp", n = 10L, model_params = gnp_params)
+y <- nvd(model = "gnp", n = 10L, model_params = gnp_params)
 t2 <- test2_global(x, y, representation = "modularity")
 t2$pvalue
 }

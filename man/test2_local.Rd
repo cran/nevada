@@ -20,9 +20,12 @@ test2_local(
 )
 }
 \arguments{
-\item{x}{An \code{\link{nvd}} object listing networks in sample 1.}
+\item{x}{Either an object of class \link{nvd} listing networks in sample 1 or a
+distance matrix of size \eqn{n_1 + n_2}.}
 
-\item{y}{An \code{\link{nvd}} object listing networks in sample 2.}
+\item{y}{Either an object of class \link{nvd} listing networks in sample 2 or an
+integer value specifying the size of sample 1 or an integer vector
+specifying the indices of the observations belonging to sample 1.}
 
 \item{partition}{Either a list or an integer vector specifying vertex
 memberships into partition elements.}
@@ -72,7 +75,7 @@ the partition for the intra- and inter-tests.
 Local Two-Sample Test for Network-Valued Data
 }
 \examples{
-n <- 10
+n <- 5L
 p1 <- matrix(
   data = c(0.1, 0.4, 0.1, 0.4,
            0.4, 0.4, 0.1, 0.4,
@@ -96,5 +99,5 @@ m <- as.integer(c(rep(1, 17), rep(2, 17), rep(3, 17), rep(4, 17)))
 test2_local(sim$x, sim$y, m,
             seed = 1234,
             alpha = 0.05,
-            B = 100)
+            B = 19)
 }

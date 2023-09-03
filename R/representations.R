@@ -58,15 +58,8 @@ repr_modularity <- function(network, validate = TRUE) {
       stop("Input network should be of class igraph.")
   }
 
-  if (length(formals(igraph::modularity_matrix)) == 3) {
-    repr <- igraph::modularity_matrix(
-      graph = network,
-      membership = rep(1, igraph::gorder(network))
-    )
-  } else {
-    repr <- igraph::modularity_matrix(network)
-  }
-
+  repr <- igraph::modularity_matrix(network)
+  repr[is.nan(repr)] <- 0
   as_modularity(repr)
 }
 
@@ -157,7 +150,8 @@ repr_transitivity <- function(network, validate = TRUE) {
 #' @export
 #'
 #' @examples
-#' x <- nvd("gnp", 10)
+#' gnp_params <- list(p = 1/3)
+#' x <- nvd(model = "gnp", n = 10L, model_params = gnp_params)
 #' xm <- repr_nvd(x)
 repr_nvd <- function(x, y = NULL, representation = "adjacency") {
   x <- lapply(x, format_input, representation)

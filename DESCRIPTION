@@ -1,7 +1,7 @@
 Package: nevada
 Type: Package
 Title: Network-Valued Data Analysis
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c( 
     person(given = "Ilenia", 
            family = "Lovato", 
@@ -14,7 +14,7 @@ Authors@R: c(
     person(given = "Aymeric",
            family = "Stamm",
            role = c("aut", "cre"), 
-           email = "aymeric.stamm@math.cnrs.fr",
+           email = "aymeric.stamm@cnrs.fr",
            comment = c(ORCID = "0000-0002-8725-3654")), 
     person(given = "Simone", 
            family = "Vantini", 
@@ -41,8 +41,9 @@ Description: A flexible statistical framework for network-valued data analysis.
 License: GPL (>= 3)
 Encoding: UTF-8
 Imports: igraph, Rcpp, tidyr, dplyr, purrr, tibble, forcats, ggplot2,
-        rlang, magrittr, flipr, cli, withr
-RoxygenNote: 7.1.2
+        rlang, magrittr, flipr, cli, withr, tsne, umap, furrr,
+        rgeomstats
+RoxygenNote: 7.2.3
 URL: https://astamm.github.io/nevada/,
         https://github.com/astamm/nevada/
 BugReports: https://github.com/astamm/nevada/issues/
@@ -50,11 +51,11 @@ Suggests: knitr, rmarkdown, covr
 VignetteBuilder: knitr
 LinkingTo: Rcpp, RcppArmadillo
 NeedsCompilation: yes
-Packaged: 2021-09-20 14:47:29 UTC; stamm-a
+Packaged: 2023-09-03 14:51:26 UTC; stamm-a
 Author: Ilenia Lovato [aut],
   Alessia Pini [aut],
   Aymeric Stamm [aut, cre] (<https://orcid.org/0000-0002-8725-3654>),
   Simone Vantini [aut]
-Maintainer: Aymeric Stamm <aymeric.stamm@math.cnrs.fr>
+Maintainer: Aymeric Stamm <aymeric.stamm@cnrs.fr>
 Repository: CRAN
-Date/Publication: 2021-09-25 06:40:02 UTC
+Date/Publication: 2023-09-03 21:00:02 UTC

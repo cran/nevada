@@ -8,11 +8,11 @@ knitr::opts_chunk$set(
 library(nevada)
 
 ## -----------------------------------------------------------------------------
-x <- nvd(model = "gnp", n = 3)
+x <- nvd(model = "gnp", n = 3, model_params = list(p = 1/3))
 repr_nvd(x, representation = "laplacian")
 
 ## -----------------------------------------------------------------------------
-x <- nvd(model = "gnp", n = 3)
+x <- nvd(model = "gnp", n = 3, model_params = list(p = 1/3))
 dist_nvd(x, representation = "laplacian", distance = "hamming")
 
 ## ---- eval=FALSE--------------------------------------------------------------
@@ -74,8 +74,8 @@ dist_nvd(x, representation = "laplacian", distance = "hamming")
 #  }
 
 ## -----------------------------------------------------------------------------
-x <- nvd(model = "gnp", n = 10)
-y <- nvd(model = "pa" , n = 10)
+x <- nvd(model = "gnp", n = 10, model_params = list(p = 1/3))
+y <- nvd(model = "k_regular" , n = 10, model_params = list(k = 8L))
 test2_global(
   x = x, 
   y = y, 

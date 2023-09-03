@@ -198,3 +198,32 @@ solve_partial <- function(M) {
   }
   Minv
 }
+
+align_graphs <- function(x, y, Ax, Ay, target_matrix, alpha = 0, max_iter = 20) {
+  n <- igraph::gorder(x)
+  P <- sample_doubly_stochastic_matrices(n = 1, matrix_size = n)
+  init <- alpha * target_matrix + (1 - alpha) * P
+  perm <- igraph::match_vertices(Ax, Ay, m = 0, iteration = max_iter, start = init)$corr[, 2]
+  yp <- igraph::permute(y, perm)
+  perm <- igraph::match_vertices(Ay, Ax, m = 0, iteration = max_iter, start = init)$corr[, 2]
+  xp <- igraph::permute(x, perm)
+  list(x = xp, y = yp)
+}
+
+sample_simplex <- function(n) {
+  diff(sort(c(stats::runif(n - 1), 0, 1)))
+}
+
+sample_doubly_stochastic_matrices <- function(n, matrix_size) {
+  so3 <- rgeomstats::SpecialOrthogonal(n = matrix_size)
+  so3$random_point(n = n)^2
+}
+
+linear_index <- function(n) {
+  res <- purrr::cross_df(
+    .l = list(j = 1:n, i = 1:n),
+    .filter = ~ .x <= .y
+  )
+  res$k <- n * (res$i - 1) - res$i * (res$i - 1) / 2 + res$j - res$i
+  res
+}
